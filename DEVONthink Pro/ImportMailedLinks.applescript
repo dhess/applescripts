@@ -28,6 +28,8 @@
 -- OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 -- SUCH DAMAGE.
 
+property signatures : {"d"}
+
 on filter(predicate, xs)
 	script f
 		property pred : predicate
@@ -114,7 +116,7 @@ on isNotEmpty(str)
 end isNotEmpty
 
 on isNotSignature(str)
-	return str is not in {"d"}
+	return str is not in my signatures
 end isNotSignature
 
 on isTagLine(str)

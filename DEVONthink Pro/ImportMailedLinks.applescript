@@ -142,8 +142,10 @@ end joinParagraphs
 
 on run
 	tell application "Mail"
-		repeat with messageNumber from 1 to count selection
-			set theMessage to item messageNumber of (selection as list)
+             try
+		set theSelection to the selection
+		if the length of theSelection is less than 1 then error "One or more messages must be selected."
+		repeat with theMessage in theSelection
 			set theParagraphs to my filter(my isNotSignature, my map(my stripLinefeeds, my filter(my isNotEmpty, Â
 				the paragraphs of the content of theMessage)))
 			-- if the first line isn't a URL, then we don't understand the message.
@@ -169,5 +171,8 @@ on run
 				end tell
 			end if
 		end repeat
+             on error error_message number error_number
+	        if error_number is not -128 then display alert "Mail" message error_message as warning
+             end try
 	end tell
 end run

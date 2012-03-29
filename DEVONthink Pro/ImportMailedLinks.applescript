@@ -142,31 +142,36 @@ end joinParagraphs
 
 on run
 	tell application "Mail"
-             try
-		set theSelection to the selection
-		if the length of theSelection is less than 1 then error "One or more messages must be selected."
-		repeat with theMessage in theSelection
-			set theParagraphs to my filter(my isNotSignature, my map(my stripLinefeeds, my filter(my isNotEmpty, Â
-				the paragraphs of the content of theMessage)))
-			-- if the first line isn't a URL, then we don't understand the message.
-			if my isHTTPURL(item 1 of theParagraphs) then
-				set theTitle to the subject of theMessage
-				set theURL to item 1 of theParagraphs
-				set thePartition to my partition(my isTagLine, the rest of theParagraphs)
-				set theTags to my map(my stripTagMarker, the first item of thePartition)
-				set theComments to the second item of thePartition
-				
-				tell application id "com.devon-technologies.thinkpro2"
-					set theRecord to create web document from theURL name theTitle in incoming group
-                                        set the tags of theRecord to theTags
-					if theComments is not {} then
-						set the comment of theRecord to my joinParagraphs(theComments)
+		try
+			set theSelection to the selection
+			if the length of theSelection is less than 1 then error "One or more messages must be selected."
+			repeat with theMessage in theSelection
+				set theParagraphs to my filter(my isNotSignature, my map(my stripLinefeeds, my filter(my isNotEmpty, Â
+					the paragraphs of the content of theMessage)))
+				-- if the first line isn't a URL, then we don't understand the message.
+				if my isHTTPURL(item 1 of theParagraphs) then
+					set theURL to item 1 of theParagraphs
+					set theSubject to the subject of theMessage
+					if theSubject = "" then
+						set theTitle to theURL
+					else
+						set theTitle to theSubject
 					end if
-				end tell
-			end if
-		end repeat
-             on error error_message number error_number
-	        if error_number is not -128 then display alert "Mail" message error_message as warning
-             end try
+					set thePartition to my partition(my isTagLine, the rest of theParagraphs)
+					set theTags to my map(my stripTagMarker, the first item of thePartition)
+					set theComments to the second item of thePartition
+					
+					tell application id "com.devon-technologies.thinkpro2"
+						set theRecord to create web document from theURL name theTitle in incoming group
+						set the tags of theRecord to theTags
+						if theComments is not {} then
+							set the comment of theRecord to my joinParagraphs(theComments)
+						end if
+					end tell
+				end if
+			end repeat
+		on error error_message number error_number
+			if error_number is not -128 then display alert "Mail" message error_message as warning
+		end try
 	end tell
 end run

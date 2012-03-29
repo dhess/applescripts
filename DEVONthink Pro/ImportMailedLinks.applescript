@@ -158,15 +158,9 @@ on run
 				
 				tell application id "com.devon-technologies.thinkpro2"
 					set theRecord to create web document from theURL name theTitle in incoming group
-					if theTags is not {} then
-						set theRecordTags to the tags of theRecord
-						set theRecordTags to theRecordTags & theTags
-						set the tags of theRecord to theRecordTags
-					end if
+                                        set the tags of theRecord to theTags
 					if theComments is not {} then
-						set theRecordComment to the comment of theRecord
-						set theRecordComment to theRecordComment & my joinParagraphs(theComments)
-						set the comment of theRecord to theRecordComment
+						set the comment of theRecord to my joinParagraphs(theComments)
 					end if
 				end tell
 			end if

@@ -127,6 +127,19 @@ on isHTTPURL(str)
 	return str starts with "http://" or str starts with "https://"
 end isHTTPURL
 
+on joinParagraphs(paras)
+	set savedDelimiters to AppleScript's text item delimiters
+	try
+		set AppleScript's text item delimiters to {linefeed}
+		set joinedParagraphs to paras as text
+		set AppleScript's text item delimiters to savedDelimiters
+		return joinedParagraphs
+	on error m number n
+		set AppleScript's text item delimiters to savedDelimiters
+		error m number n
+	end try
+end joinParagraphs
+
 on run
 	tell application "Mail"
 		repeat with messageNumber from 1 to count selection
@@ -140,6 +153,20 @@ on run
 				set thePartition to my partition(my isTagLine, the rest of theParagraphs)
 				set theTags to my map(my stripTagMarker, the first item of thePartition)
 				set theComments to the second item of thePartition
+				
+				tell application id "com.devon-technologies.thinkpro2"
+					set theRecord to create web document from theURL name theTitle in incoming group
+					if theTags is not {} then
+						set theRecordTags to the tags of theRecord
+						set theRecordTags to theRecordTags & theTags
+						set the tags of theRecord to theRecordTags
+					end if
+					if theComments is not {} then
+						set theRecordComment to the comment of theRecord
+						set theRecordComment to theRecordComment & my joinParagraphs(theComments)
+						set the comment of theRecord to theRecordComment
+					end if
+				end tell
 			end if
 		end repeat
 	end tell

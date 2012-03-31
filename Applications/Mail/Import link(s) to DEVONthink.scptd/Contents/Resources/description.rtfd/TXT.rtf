@@ -1,0 +1,21 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf320
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 This script bundle imports all Mail messages in the current selection into the default DEVONthink Pro database Inbox (or into the global DEVONthink Pro Inbox, if it is the current selection in DEVONthink Pro).\
+\
+The selected messages are assumed to follow this format:\
+\
+  * first line of message body: an HTTP or HTTPS URI. If the first line of the body is not a properly-formatted HTTP or HTTPS URI, the message is ignored and is not imported into DEVONthink Pro.\
+\
+  * subject: used as the name of the record in DEVONthink Pro. If the subject line is empty, DEVONthink Pro will use the URI line as the record name.\
+\
+  * lines in message body beginning with "#": the remainder of such lines (after the leading "#") is treated as a tag value; this tag value is attached to the DEVONthink Pro record. Tag lines are optional. Multiple tag lines are supported.\
+\
+Lines that contain (part of) a signature are ignored. The script provides a property named "signatures", of type list-of-string. Any lines that are a complete match with a string in this list are considered to be (part of) a signature. The default value of this property is \{"d"\}.\
+\
+Any remaining lines are treated as comments; these are attached to the DEVONthink Pro record as Spotlight comments. Comment lines are optional.\
+\
+After a message is successfully imported into DEVONthink Pro, it is moved to the Trash folder of the account to which the message belongs. (Messages that do not follow the expected format are ignored and are not moved to the Trash folder.)\
+}

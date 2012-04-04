@@ -38,7 +38,6 @@
    For example, if I send a message like this to myself:
 
    #+BEGIN_EXAMPLE
-   --
    From: Drew Hess
    To: Drew Hess
    Subject: Doug's AppleScripts for iTunes
@@ -48,7 +47,6 @@
    #applescripts
 
    d
-   --
    #+END_EXAMPLE
 
    then when I select this message in Mail.app and run the Import

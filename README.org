@@ -28,13 +28,12 @@
    records, and moves the messages to the Trash folder.
    Improperly-formatted messages are ignored.
 
-   The script contains a list-of-strings property named
-   src_shell{"signatures"}. Any lines in the selected message that are
-   found in this list are ignored when the message is imported into
-   DEVONthink Pro. As the name of the property suggests, this
-   functionality is useful for ignoring email signatures. The default
-   value of this property is src_shell{{"d"}}; you will certainly want
-   to change it.
+   The script contains a list-of-strings property named "signatures".
+   Any lines in the selected message that are found in this list are
+   ignored when the message is imported into DEVONthink Pro. As the
+   name of the property suggests, this functionality is useful for
+   ignoring email signatures. The default value of this property is
+   {"d"}; you will certainly want to change it.
 
    For example, if I send a message like this to myself:
 
@@ -62,11 +61,11 @@ d
 * INSTALLING
 
   Either copy or symlink the included script(s) into your
-  src_shell{~/Library/Scripts} directory. Make sure you preserve the
-  filesystem layout, so that the scripts are visible to the
-  applications they operate on; e.g., if the script lives in the
-  src_shell{Applications/Mail/} directory, you should copy/symlink it
-  into src_shell{~/Library/Scripts/Applications/Mail/}.
+  ~/Library/Scripts directory. Make sure you preserve the filesystem
+  layout, so that the scripts are visible to the applications they
+  operate on; e.g., if the script lives in the Applications/Mail/
+  directory, you should copy/symlink it into
+  ~/Library/Scripts/Applications/Mail/.
 
 * LICENSE
 

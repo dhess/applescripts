@@ -1,0 +1,83 @@
+
+* WHAT
+
+  A collection of AppleScripts that I have written or have modified:
+
+** Archive link(s)
+
+   Convert selected Bookmark records in DEVONthink Pro to Web Archive
+   records, deleting the original Bookmark record in the process. This
+   script is useful for capturing links from RSS feeds, e.g., for
+   adding articles from your Instapaper RSS feed to your DEVONthink
+   Pro database.
+
+** Import link(s) to DEVONthink
+
+   When I'm using my iPhone or iPad and I find an interesting URL that
+   I'd like to add to my DEVONthink Pro database, I mail the link to
+   myself, using the following format for the message:
+
+   - Subject: the name of the DEVONthink Pro record.
+   - First line of body: the URL.
+   - Lines beginning with "#": tags to associate with the record.
+   - Everything else: Spotlight comments to associate with the record.
+
+   Later, when I'm on my Mac and I have access to my DEVONthink Pro
+   database, I select these messages in Mail.app and run this script,
+   which imports the messages into DEVONthink Pro as Web Archive
+   records, and moves the messages to the Trash folder of the
+   messages' mail account.
+
+   The script contains list-of-strings property named "signatures".
+   Any lines in the selected message that are found in this list are
+   ignored when the message is imported into DEVONthink Pro. As the
+   name of the property suggests, this functionality is useful for
+   ignoring email signatures. The default value of this property is
+   {"d"}; you will certainly want to change it.
+
+   For example, if I send a message like this to myself:
+
+   #+BEGIN_EXAMPLE
+   --
+   From: Drew Hess
+   To: Drew Hess
+   Subject: Doug's AppleScripts for iTunes
+
+   http://dougscripts.com/itunes/
+   #itunes
+   #applescripts
+
+   d
+   --
+   #+END_EXAMPLE
+
+   then when I select this message in Mail.app and run the Import
+   link(s) to DEVONthink script on it, the script will create a new
+   Web Archive record in the Inbox of my default DEVONthink Pro import
+   group, with the name "Doug's AppleScripts for iTunes," with the
+   tags "itunes" and "applescripts", and with a web archive of
+   http://dougscripts.com/itunes/.
+
+   See the script description for more details.
+
+* INSTALLING
+
+  Either copy or symlink the included script(s) into your
+  ~/Library/Scripts directory. Make sure you preserve the filesystem
+  layout, so that the scripts are visible to the applications they
+  operate on; e.g., if the script lives in the Applications/Mail/
+  directory, you should copy/symlink it into
+  ~/Library/Scripts/Applications/Mail/
+
+* LICENSE
+
+  All scripts authored by me are licensed under the [[http://www.opensource.org/licenses/BSD-3-Clause][BSD 3-clause
+  license]].
+
+  Scripts adapted/forked from other authors use the license of the
+  original work.
+
+* CONTACT
+
+- email: [[mailto:src@drewhess.com][Drew Hess <src@drewhess.com>]]
+- web: [[http://www.drewhess.com/]]

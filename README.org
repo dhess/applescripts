@@ -25,52 +25,52 @@
    Later, when I'm on my Mac and I have access to my DEVONthink Pro
    database, I select these messages in Mail.app and run this script,
    which imports the messages into DEVONthink Pro as Web Archive
-   records, and moves the messages to the Trash folder of the
-   messages' mail account.
+   records, and moves the messages to the Trash folder.
+   Improperly-formatted messages are ignored.
 
-   The script contains list-of-strings property named "signatures".
-   Any lines in the selected message that are found in this list are
-   ignored when the message is imported into DEVONthink Pro. As the
-   name of the property suggests, this functionality is useful for
-   ignoring email signatures. The default value of this property is
-   {"d"}; you will certainly want to change it.
+   The script contains a list-of-strings property named
+   src_shell{"signatures"}. Any lines in the selected message that are
+   found in this list are ignored when the message is imported into
+   DEVONthink Pro. As the name of the property suggests, this
+   functionality is useful for ignoring email signatures. The default
+   value of this property is src_shell{{"d"}}; you will certainly want
+   to change it.
 
    For example, if I send a message like this to myself:
 
-   #+BEGIN_EXAMPLE
-   From: Drew Hess
-   To: Drew Hess
-   Subject: Doug's AppleScripts for iTunes
+#+BEGIN_EXAMPLE
+From: Drew Hess
+To: Drew Hess
+Subject: Doug's AppleScripts for iTunes
 
-   http://dougscripts.com/itunes/
-   #itunes
-   #applescripts
+http://dougscripts.com/itunes/
+#itunes
+#applescripts
 
-   d
-   #+END_EXAMPLE
+d
+#+END_EXAMPLE
 
    then when I select this message in Mail.app and run the Import
    link(s) to DEVONthink script on it, the script will create a new
    Web Archive record in the Inbox of my default DEVONthink Pro import
    group, with the name "Doug's AppleScripts for iTunes," with the
    tags "itunes" and "applescripts", and with a web archive of
-   http://dougscripts.com/itunes/.
+   [[http://dougscripts.com/itunes/]].
 
    See the script description for more details.
 
 * INSTALLING
 
   Either copy or symlink the included script(s) into your
-  ~/Library/Scripts directory. Make sure you preserve the filesystem
-  layout, so that the scripts are visible to the applications they
-  operate on; e.g., if the script lives in the Applications/Mail/
-  directory, you should copy/symlink it into
-  ~/Library/Scripts/Applications/Mail/
+  src_shell{~/Library/Scripts} directory. Make sure you preserve the
+  filesystem layout, so that the scripts are visible to the
+  applications they operate on; e.g., if the script lives in the
+  src_shell{Applications/Mail/} directory, you should copy/symlink it
+  into src_shell{~/Library/Scripts/Applications/Mail/}.
 
 * LICENSE
 
-  All scripts authored by me are licensed under the [[http://www.opensource.org/licenses/BSD-3-Clause][BSD 3-clause
-  license]].
+  All scripts authored by me are licensed under the [[http://www.opensource.org/licenses/BSD-3-Clause][BSD 3-clause license]].
 
   Scripts adapted/forked from other authors use the license of the
   original work.
